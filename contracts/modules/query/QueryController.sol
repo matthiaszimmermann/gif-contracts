@@ -1,5 +1,5 @@
-pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
+pragma solidity ^0.8.0;
 
 import "./QueryStorageModel.sol";
 import "./IQueryController.sol";
@@ -139,7 +139,7 @@ contract QueryController is IQueryController, QueryStorageModel, ModuleControlle
             "ERROR:QUC-011:ORACLE_DOES_NOT_EXIST"
         );
         oracles[_oracleId].state = _state;
-        LogOracleSetState(_oracleId, _state);
+        emit LogOracleSetState(_oracleId, _state);
     }
 
     function approveOracle(uint256 _oracleId) external override onlyInstanceOperator {

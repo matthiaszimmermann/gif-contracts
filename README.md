@@ -1,46 +1,55 @@
 # GIF Core Contracts
 
-This repository holds the necessary contracts and tools to interact with an existing GIF instance.
+This repository holds the GIF core contracts and tools to develop, test and deploy GIF instances.
 
-## Setup
-
-Clone this repository
+## Clone Repository
 
 ```bash
 git clone https://github.com/matthiaszimmermann/gif-contracts.git
-cd git-contracts
+cd gif-contracts
 ```
 
-Use [Brownie](https://github.com/matthiaszimmermann/brownie-docker) and start a brownie container
+## Create Brownie Docker Image
+
+[Brownie](https://eth-brownie.readthedocs.io/en/stable) is used for development of the contracts in this repository.
+
+Alternatively to installing a python development environment and the brownie framework, wokring with Brownie is also possible via Docker.
+For this, build the brownie Docker image as shown below.
+The Dockerfile in this repository is a trimmed down version from [Brownie Github]((https://github.com/eth-brownie/brownie))
+
+```bash
+docker build -t brownie .
+```
+
+## Run Brownie Container
 
 ```bash
 docker run -it --rm -v $PWD:/projects brownie
 ```
 
-<!-- docker run -it --rm -v $PWD:/app gif-truffle bash -->
+## Compile the GIF Core Contracts
 
-Inside the brownie container compile the contracts/interfaces.
-
-Note: the `--all` switch has the effect that necessary dependencies are loaded and compiled too.
-Compile will only succees when using `--all`. 
-Alternatively you may manually load these packages using `brownie pm install ...`
+Inside the Brownie container compile the contracts/interfaces
 
 ```bash
 brownie compile --all
 ```
+
+## Run GIF Unit Tests
 
 Run the unit tests
 ```bash
 brownie test
 ```
 
-Start brownie console
+## Deploy and Use GIF Interactively
+
+Start the Brownie console that shows the `>>>` console prompt.
 ```bash
 brownie console
->>> 
 ```
 
-Example brownie console session
+Example session inside the Brownie console
 ```bash
 from scripts.instance import GifInstance
 from scripts.product import GifTestOracle
@@ -96,7 +105,3 @@ pc.getClaim(policyId1, 0)
 pc.getClaim(policyId2, 0)
 
 ```
-
-## Project Structure
-
-The project structure matches with the [Brownie project structure](https://eth-brownie.readthedocs.io/en/stable/structure.html#structure)
